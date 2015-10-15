@@ -1,0 +1,67 @@
+{%extends "base.html" %}
+{% block head %}{% endblock %}
+{%block title %}Welcome{% endblock %}
+{%block content %}
+{% load staticfiles %}
+<!-- Bootstrap core CSS -->
+<link href="{% static 'photoapp/css/bootstrap.css' %}" rel="stylesheet">
+
+<script type="text/javascript">
+// $.ajax({
+//     url: "/", //gets data from root url
+//     success: function(data) {
+//       //alert(data)
+//       var divPhotoStream = $(data).find('#photoStreamDiv').html(); //get the div gotomessages from data
+//       $('#photoStreamDiv').html(divPhotoStream); //replace the div gotomessages to divMessages
+//       $('#photoStreamDiv').show();
+//     }
+// });
+</script>
+<!-- Custom styles for this template -->
+<style>
+#photoDiv {
+    display: inline-block;
+    margin: 50px;
+}
+#imgFlickr{
+  border: 10px solid;
+}
+#searchDiv {
+  float:right;
+}
+</style>
+<div class="container">
+  <h1>Flickr PhotoStream Sample</h1>
+  <hr>
+  <div id="searchDiv">
+    <form action="" method="post">
+    Enter Search Term: <input type="text" id="searchString" name="searchText" value="{{search}}" required maxlength="30" >
+    <button class="btn btn-lg btn-primary" type="submit">Search</button>
+    {%csrf_token%}
+    </form>
+  </div>
+  <div id="photoStreamDiv" style="display:none;" >
+    <p>
+    {% for row in photoposts %}
+    {% if 'jpg' in row%}
+    <img id="imgFlickr"src='{{row}}'/>
+    </div>
+    {% elif 'https://' in row%}
+    <div id="photoDiv">
+     | <a href='{{row}}' target="_blank">Flickr</a>
+     <br/>
+     {% elif 'https%3A%2F%2F' in row%}
+    <div>
+     <iframe src="https://www.facebook.com/plugins/like.php?href={{row}}" style="border:none" width="200px" height="42.25px"></iframe>
+    </div>
+    {% endif %}
+    {% endfor %}
+    </p>
+  </div>
+</div>
+<script>
+$(document).ready(function() {
+  $('#photoStreamDiv').show();
+});
+</script>
+{% endblock %}
