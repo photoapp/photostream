@@ -31,16 +31,17 @@ def feedParser(url_str, search_text):
 
     feed_url = feedparser.parse(rss_url)
 
-    content = feed_url['entries'][1].content
+    if feed_url['entries']:
+        content = feed_url['entries'][1].content
 
-    posts = []
+        posts = []
 
-    for x in feed_url['entries']:
-        posts.append(x.content[0].value) #get the html of images and sources.
+        for x in feed_url['entries']:
+            posts.append(x.content[0].value) #get the html of images and sources.
 
-    ptext = MyHTMLParser()
+        ptext = MyHTMLParser()
 
-    for x in posts:
-        ptext.feed(x) #parse html with img and href.
+        for x in posts:
+            ptext.feed(x) #parse html with img and href.
 
-    return imgsrc
+        return imgsrc
