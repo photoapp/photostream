@@ -40,7 +40,7 @@
     {%csrf_token%}
     </form>
   </div>
-  <div id="photoStreamDiv" style="display:none;" >
+  <div id="photoStreamDiv" style="opacity:0;" >
     <p>
     {% for row in photoposts %}
     {% if 'jpg' in row%}
@@ -61,7 +61,7 @@
 </div>
 <script>
 $(document).ready(function() {
-  $('#photoStreamDiv').show();
+  $('#photoStreamDiv').delay(5000).animate({opacity: '1.0'}, 600);
 });
 </script>
 {% endblock %}
