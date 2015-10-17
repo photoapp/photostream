@@ -11,6 +11,11 @@ Features:
 - The user can enter a keyword and click on the search button and the app returns images with relevant tags.
 - The user could Facebook 'like' the images.
 
+Required Python Libraries:
+- feedparser
+- HTMLParser
+- urllib
+
 When using the app, you must first configure the setting.py:
 - Put in your template directory, which is located under photostream->photoapp->templates.
 
