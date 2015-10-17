@@ -5,31 +5,7 @@
 {% load staticfiles %}
 <!-- Bootstrap core CSS -->
 <link href="{% static 'photoapp/css/bootstrap.css' %}" rel="stylesheet">
-
-<script type="text/javascript">
-// $.ajax({
-//     url: "/", //gets data from root url
-//     success: function(data) {
-//       //alert(data)
-//       var divPhotoStream = $(data).find('#photoStreamDiv').html(); //get the div gotomessages from data
-//       $('#photoStreamDiv').html(divPhotoStream); //replace the div gotomessages to divMessages
-//       $('#photoStreamDiv').show();
-//     }
-// });
-</script>
-<!-- Custom styles for this template -->
-<style>
-#photoDiv {
-    display: inline-block;
-    margin: 50px;
-}
-#imgFlickr{
-  border: 10px solid;
-}
-#searchDiv {
-  float:right;
-}
-</style>
+<link href="{% static 'photoapp/css/custom.css' %}" rel="stylesheet">
 <div class="container">
   <h1>Flickr PhotoStream Sample</h1>
   <hr>
@@ -40,28 +16,31 @@
     {%csrf_token%}
     </form>
   </div>
-  <div id="photoStreamDiv" style="opacity:0;" >
-    <p>
+  <div id="photoContentDiv" style="opacity:0;">
     {% for row in photoposts %}
+
     {% if 'jpg' in row%}
-    <img id="imgFlickr"src='{{row}}'/>
-    </div>
-    {% elif 'https://' in row%}
-    <div id="photoDiv">
-     | <a href='{{row}}' target="_blank">Flickr</a>
-     <br/>
-     {% elif 'https%3A%2F%2F' in row%}
-    <div>
-     <iframe src="https://www.facebook.com/plugins/like.php?href={{row}}" style="border:none" width="200px" height="42.25px"></iframe>
+    <div id="photoStreamDiv">
+        <div id="imgDiv">
+          <img id="imgFlickr"src='{{row}}'/>
+        </div>
+      {% elif 'https://' in row%}
+      <div>
+       | <a href='{{row}}' target="_blank">Flickr</a>
+      </div>
+       {% elif 'https%3A%2F%2F' in row%}
+       <div id="fbDiv">
+         <iframe src="https://www.facebook.com/plugins/like.php?href={{row}}" style="border:none" width="200px" height="60px"></iframe>
+       </div>
     </div>
     {% endif %}
+
     {% endfor %}
-    </p>
   </div>
 </div>
 <script>
 $(document).ready(function() {
-  $('#photoStreamDiv').delay(5000).animate({opacity: '1.0'}, 600);
+  $('#photoContentDiv').delay(5000).animate({opacity: '1.0'}, 600);
 });
 </script>
 {% endblock %}

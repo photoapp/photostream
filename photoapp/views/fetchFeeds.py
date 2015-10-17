@@ -12,7 +12,7 @@ class MyHTMLParser(HTMLParser):
                 imgsrc.append(attrs[0][1])
 
             if attrs[0][0] == 'href':
-                if 'photos' in attrs[0][1]:
+                if 'https://www.flickr.com/photos' in attrs[0][1]:
                     imgsrc.append(attrs[0][1])
                     urlenc = quote(attrs[0][1],safe='') #urlencoded url for facebook likes.
                     imgsrc.append(urlenc)

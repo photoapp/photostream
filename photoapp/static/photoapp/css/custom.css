@@ -1,0 +1,23 @@
+/*Custom CSS for index.html*/
+
+/* Layout */
+#imgFlickr{
+  border: 10px solid;
+}
+#searchDiv {
+  float:right;
+  margin-left: 60%;
+  margin-bottom: 10%;
+}
+#photoStreamDiv {
+  width:250px;
+  float:left;
+  margin-right:10%;
+}
+#imgDiv {
+  width:250px;
+  height:300px;
+}
+#fbDiv {
+  margin-bottom:50%;
+}

@@ -9,6 +9,7 @@ from html.parser import HTMLParser
 import feedparser
 from urllib.parse import quote
 from photoapp.views.fetchFeeds import *
+from photoapp.views.arrangeList import *
 
 def main_page(request):
 
@@ -18,7 +19,9 @@ def main_page(request):
 
         searchTerm = request.POST.get('searchText') #text to search for.
 
-        imgsrc = feedParser(http_url, searchTerm)
+        imgList = feedParser(http_url, searchTerm)
+
+        imgsrc = arrangeListItems(imgList)
 
         variables2 = RequestContext(request,{'photoposts':imgsrc})
         return render_to_response('index.html', variables2)
@@ -27,7 +30,9 @@ def main_page(request):
 
         http_url = 'https://api.flickr.com/services/feeds/photos_public.gne' #Flickr feed API
 
-        imgsrc = feedParser(http_url,'')
+        imgList = feedParser(http_url,'')
+
+        imgsrc = arrangeListItems(imgList)
 
         variables = RequestContext(request,{'photoposts':imgsrc})
         return render_to_response('index.html', variables)
